@@ -1,0 +1,36 @@
+name: Run HIL Tests
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+  TIMEZONE: "Europe/Berlin"
+
+jobs:
+  test:
+    runs-on: [rpi, cim, hil]
+
+    # permissions:
+    #   contents: read
+    #   packages: write
+    #   attestations: write
+    #   id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: ${{ env.TIMEZONE }}
+
+      - uses: pavelzw/pytest-action@v2
+        with:
+          emoji: false
+          verbose: true
+          job-summary: true
+          click-to-expand: false
