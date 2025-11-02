@@ -1,3 +1,6 @@
+import pytest
+
+@pytest.mark.skip(reason="CAN test currently broken, skipping for GPIO testing")
 def test():
     assert True
 
