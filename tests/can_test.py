@@ -26,5 +26,5 @@ def test():
     msg = can1.recv(10.0)
     # verify signal was multiplied
     ## with assert statements
-    assert message.signal = 10
+    assert message.signal == 10
     
