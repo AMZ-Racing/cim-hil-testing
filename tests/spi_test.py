@@ -9,7 +9,7 @@ def test_spi_device_exists():
 
 
 def test_spi_open_close():
-    """Try opening and closing the SPI interface."""
+    
     spi = spidev.SpiDev()
     spi.open(0, 0)  # Bus 0, device 0
     spi.max_speed_hz = 500000
