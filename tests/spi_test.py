@@ -1,5 +1,5 @@
 import time
-import spidev as spi
+import spidev 
 import os
 import pytest 
 
