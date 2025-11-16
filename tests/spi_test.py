@@ -19,7 +19,7 @@ def test_spi_open_close():
 ##checks if byte sequences are sent
 def test_spi_loopback():
     spi = spidev.SpiDev()
-    spi.max_speed_hz = 500000 #this is just a random value
+    spi.max_speed_hz = 500000 
     spi.mode = 0
 
     tx_data = [0x55, 0xAA, 0xFF] #pattern that is sent
