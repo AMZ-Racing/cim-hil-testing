@@ -19,6 +19,7 @@ def test_spi_open_close():
 ##checks if byte sequences are sent
 def test_spi_loopback():
     spi = spidev.SpiDev()
+    spi.open(0, 0)
     spi.max_speed_hz = 500000 
     spi.mode = 0
 
