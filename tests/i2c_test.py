@@ -33,7 +33,7 @@ def test_i2c_scan():
             bus.write_quick(addr)
             found.append(addr)
         except Exception:
-            pass  # No device -> normal, ignore
+            pass  # No device -> normal behaviour
 
     bus.close()
 
