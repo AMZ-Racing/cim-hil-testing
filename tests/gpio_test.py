@@ -5,8 +5,11 @@ import time
 #If you want to refer to the pins by the number printed on the board
 #GPIO.setmode(GPIO.BOARD)
 
-#If you want to refer to the pins by the Broadcom SOC channel. (specific to RPi 4!)
-GPIO.setmode(GPIO.BCM) 
+@pytest.fixture(scope="module", autouse=True)
+def setup_gpio_module():
+    GPIO.setmode(GPIO.BCM)
+    yield
+    GPIO.cleanup()
 
 #Test 1: confirm that the GPIO library works
 def test_gpio_library_available():

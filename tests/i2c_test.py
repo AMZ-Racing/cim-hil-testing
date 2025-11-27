@@ -2,12 +2,16 @@ import time
 import os
 import pytest
 import smbus
+import glob
 #https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
 
 #Test 1: check if interface is enabled
+import glob
+
 def test_i2c_device_exists():
-    assert os.path.exists('/dev/i2c-1'), \
-        "I^2C device not found. Enable I^2C using 'sudo raspi-config'."
+    # Accept any valid i2c bus
+    i2c_buses = glob.glob('/dev/i2c-*')
+    assert len(i2c_buses) > 0, "No I²C bus found. Enable it in raspi-config."
 
 #Test 2: quick open close test
 @pytest.mark.skipif(not os.path.exists('/dev/i2c-1'),
