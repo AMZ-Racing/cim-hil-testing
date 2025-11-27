@@ -9,7 +9,7 @@ OUTPUT_PIN = 8
 @pytest.fixture(scope="module", autouse=True)
 def setup_gpio():
     
-    GPIO.setmode(GPIO.BOARD) # use physical board numbering
+    GPIO.setmode(GPIO.BCM) # use physical board numbering
     GPIO.setwarnings(False) # ignores pin is already in use warning
     GPIO.setup(OUTPUT_PIN, GPIO.OUT, initial=GPIO.LOW) # configure "OUTPUT_PIN" as an output and the initial state is low
     # everything before "yield" runs before the test
