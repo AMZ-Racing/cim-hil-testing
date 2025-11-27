@@ -26,10 +26,10 @@ def test_gpio_high_low():
     assert GPIO.input(test_pin) == GPIO.HIGH
 
     GPIO.output(test_pin, GPIO.LOW)
-    time.sleep(0.5)
+    time.sleep(0.1)
     assert GPIO.input(test_pin) == GPIO.LOW
 
-    GPIO.cleanup()
+    # GPIO.cleanup()
 
 #Test 3: confirm you can read a state -> Loopback
 def test_gpio_loopback():
@@ -42,13 +42,13 @@ def test_gpio_loopback():
 
     GPIO.output(out_pin, GPIO.HIGH)
     time.sleep(0.1)
-    assert GPIO.input(in_pin) == HIGH
+    assert GPIO.input(in_pin) == GPIO.HIGH
 
     GPIO.output(out_pin, GPIO.LOW)
     time.sleep(0.1)
-    assert GPIO.input(in_pin) == LOW
+    assert GPIO.input(in_pin) == GPIO.LOW
 
-    GPIO.cleanup()
+    # GPIO.cleanup()
 
 #Test 4: CAN FD HAT specific GPIO test
 @pytest.mark.skip("Requires CAN FD HAT")
