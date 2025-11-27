@@ -47,5 +47,5 @@ def test_can_fd_loop():
     assert msg_in is not None, "No CAN message received back from CIM"
 
     expected = msg_out.data[0] * 10
-    assert msg_in.data[0] == expected, \f"Expected {expected}, got {msg_in.data[0]}."
+    assert msg_in.data[0] == expected, f"Expected {expected}, got {msg_in.data[0]}."
     
