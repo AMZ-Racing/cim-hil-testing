@@ -1,0 +1,7 @@
+pytest
+pytest-md
+emoji
+python-can
+RPi.GPIO
+spidev
+smbus2

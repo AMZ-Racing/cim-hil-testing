@@ -27,6 +27,23 @@ jobs:
       - uses: szenius/set-timezone@v1.2
         with:
           timezoneLinux: ${{ env.TIMEZONE }}
+      
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y can-utils net-tools
+
+      - name: Enable SPI and I^2C 
+        run: |
+          sudo raspi-config nonint do_spi 0
+          sudo raspi-config nonint do_i2c 0
+
+      # flash CIM firmware automatically
+      # picotool
 
       - uses: pavelzw/pytest-action@v2
         with:
