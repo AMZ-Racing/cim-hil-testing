@@ -40,13 +40,13 @@ def test_gpio_loopback():
     GPIO.setup(out_pin, GPIO.OUT)
     GPIO.setup(in_pin, GPIO.IN)
 
-    GPIO.output(in_pin, GPIO.HIGH)
+    GPIO.input(in_pin, GPIO.HIGH)
     time.sleep(0.1)
-    assert GPIO.input(out_pin) == GPIO.HIGH
+    assert GPIO.output(out_pin) == GPIO.HIGH
 
-    GPIO.output(in_pin, GPIO.LOW)
+    GPIO.input(in_pin, GPIO.LOW)
     time.sleep(0.1)
-    assert GPIO.input(out_pin) == GPIO.LOW
+    assert GPIO.output(out_pin) == GPIO.LOW
 
     # GPIO.cleanup()
 
