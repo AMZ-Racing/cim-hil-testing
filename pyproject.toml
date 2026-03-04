@@ -1,0 +1,10 @@
+[project]
+name = "cim-hil-tests"
+version = "0.1.0"
+
+dependencies = [
+    "pytest",
+    "python-can",
+    "RPi.GPIO",
+    "smbus2",
+]

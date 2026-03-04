@@ -2,8 +2,7 @@ name: Run HIL Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -14,12 +13,6 @@ jobs:
   test:
     runs-on: [rpi, cim, hil]
 
-    # permissions:
-    #   contents: read
-    #   packages: write
-    #   attestations: write
-    #   id-token: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,27 +20,18 @@ jobs:
       - uses: szenius/set-timezone@v1.2
         with:
           timezoneLinux: ${{ env.TIMEZONE }}
-      
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
 
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y can-utils net-tools
-
-      - name: Enable SPI and I^2C 
+      - name: Enable SPI and I²C
         run: |
           sudo raspi-config nonint do_spi 0
           sudo raspi-config nonint do_i2c 0
 
-      # flash CIM firmware automatically
-      # picotool
+      - name: Install uv if missing
+        run: |
+          if ! command -v uv &> /dev/null; then
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+          fi
 
-      - uses: pavelzw/pytest-action@v2
-        with:
-          emoji: false
-          verbose: true
-          job-summary: true
-          click-to-expand: false
+      - name: Run Tests with uv
+        run: |
+          uv run pytest -vv
