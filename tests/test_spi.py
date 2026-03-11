@@ -1,21 +1,44 @@
 import spidev
 import pytest
+import time
 
 
+#Test 1: confirm that the SPI library works
 def test_spi_library_available():
-    spi = spidev.SpiDev()
-    assert spi is not None
+    assert hasattr(spidev, "SpiDev"), "SPI library is not functioning"
 
 
+#Test 2: confirm that the SPI bus can open
 def test_spi_open():
 
     spi = spidev.SpiDev()
+    spi.open(0,0)   #SPI bus 0, device 0
 
-    spi.open(0, 0)   # SPI bus 0, device 0
+    spi.max_speed_hz = 500000
+
+    assert spi is not None
+
+    spi.close()
+
+
+#Test 3: confirm data can be transmitted over SPI
+def test_spi_transfer():
+
+    spi = spidev.SpiDev()
+    spi.open(0,0)
+
     spi.max_speed_hz = 500000
 
     response = spi.xfer2([0x00])
 
-    spi.close()
+    time.sleep(0.1)
 
     assert isinstance(response, list)
+
+    spi.close()
+
+
+#Test 4: SPI device specific test
+@pytest.mark.skip("Requires SPI device connected")
+def test_spi_device():
+    pass
