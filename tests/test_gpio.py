@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 import pytest
 import time
+import subprocess
+import can
 
 #If you want to refer to the pins by the number printed on the board
 #GPIO.setmode(GPIO.BOARD)
@@ -48,7 +50,41 @@ def test_gpio_loopback():
     assert GPIO.input(in_pin) == GPIO.LOW
 
 
-#Test 4: CAN FD HAT specific GPIO test
+#Test 4: CAN FD HAT specific test
 @pytest.mark.skip("Requires CAN FD HAT")
 def test_can_hat_gpio():
-    pass
+
+    #Check if CAN interface exists
+    result = subprocess.run(
+        ["ip", "link", "show", "can0"],
+        capture_output=True,
+        text=True
+    )
+
+    assert result.returncode == 0, "CAN interface can0 not found"
+
+
+    #Bring up CAN interface
+    subprocess.run(
+        ["sudo", "ip", "link", "set", "can0", "up", "type", "can", "bitrate", "500000"],
+        check=True
+    )
+
+
+    #Open CAN bus
+    bus = can.interface.Bus(
+        channel="can0",
+        interface="socketcan"
+    )
+
+
+    #Send test message
+    msg = can.Message(
+        arbitration_id=0x123,
+        data=[1,2,3,4],
+        is_extended_id=False
+    )
+
+    bus.send(msg)
+
+    assert True

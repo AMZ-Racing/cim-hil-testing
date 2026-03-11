@@ -1,4 +1,8 @@
 import pytest
+import subprocess
+import can
+
+
 
 
 @pytest.mark.skip("Requires CAN interface setup")
