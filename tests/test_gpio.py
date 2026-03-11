@@ -72,19 +72,25 @@ def test_can_hat_gpio():
 
 
     #Open CAN bus
-    bus = can.interface.Bus(
-        channel="can0",
-        interface="socketcan"
+    can0 = can.interface.Bus(
+        channel = "can0",
+        bustype = "socketcan_ctypes"
+    )
+
+    can1 = can.interface.Bus(
+        channel = 'can1', 
+        bustype = 'socketcan_ctypes'
     )
 
 
     #Send test message
-    msg = can.Message(
+    msg = can.Message(is_extended_id=False,
         arbitration_id=0x123,
-        data=[1,2,3,4],
-        is_extended_id=False
+        data=[1,2,3,4]
     )
 
-    bus.send(msg)
+    can0.send(msg)
 
     assert True
+
+    
