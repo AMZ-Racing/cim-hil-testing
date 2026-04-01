@@ -5,7 +5,7 @@ import pytest
 def read_adc(channel):
 
     spi = spidev.SpiDev()
-    spi.open(0,0)
+    spi.open(0,1)  #SPI bus 0, device 1
     spi.max_speed_hz = 1000000
 
     # Example ADC command
