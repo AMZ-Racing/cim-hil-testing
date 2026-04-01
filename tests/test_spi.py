@@ -12,7 +12,7 @@ def test_spi_library_available():
 def test_spi_open():
 
     spi = spidev.SpiDev()
-    spi.open(0,0)   #SPI bus 0, device 0
+    spi.open(0,1)   #SPI bus 0, device 0
 
     spi.max_speed_hz = 500000
 
