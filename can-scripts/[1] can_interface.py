@@ -3,9 +3,6 @@ import pytest
 import subprocess
 import can
 
-@pytest.mark.skip("Requires CAN interface setup")
-def test_can_send():
-    pass
 
 def test_can_interface_up():
     import os

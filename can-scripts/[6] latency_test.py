@@ -6,9 +6,6 @@ import can
 import time
 
 @pytest.mark.skip("Requires CAN interface setup")
-def test_can_send():
-    pass
-
 def test_can_latency(can0, can1):
     start = time.time()
     can0.send(0x123, [1])

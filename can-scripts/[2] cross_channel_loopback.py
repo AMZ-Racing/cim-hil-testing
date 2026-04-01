@@ -1,11 +1,9 @@
 # sends CAN message from can0 to can1 and confirms it is received on can1
+import pytest
 import can
 import time
 
 @pytest.mark.skip("Requires CAN interface setup")
-def test_can_send():
-    pass
-
 def test_can_cross_channel(can0, can1):
     can0.send(0x123, [1,2,3])
 

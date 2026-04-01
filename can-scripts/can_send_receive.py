@@ -3,9 +3,6 @@ import pytest
 import can
 import time
 
-@pytest.mark.skip("Requires CAN interface setup")
-def test_can_send():
-    pass
 
 # Initialize CAN bus
 bus = can.interface.Bus(channel='can0', bustype='socketcan')
