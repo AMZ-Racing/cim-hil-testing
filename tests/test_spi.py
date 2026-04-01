@@ -36,9 +36,3 @@ def test_spi_transfer():
     assert isinstance(response, list)
 
     spi.close()
-
-
-#Test 4: SPI device specific test
-@pytest.mark.skip("Requires SPI device connected")
-def test_spi_device():
-    pass

@@ -33,9 +33,3 @@ def test_i2c_scan():
     time.sleep(0.1)
 
     assert isinstance(devices, list)
-
-
-#Test 4: I2C device specific test
-@pytest.mark.skip("Requires I2C device connected")
-def test_i2c_device():
-    pass

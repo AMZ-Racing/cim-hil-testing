@@ -51,7 +51,7 @@ def test_gpio_loopback():
 
 
 #Test 4: CAN FD HAT specific test
-@pytest.mark.skip("Requires CAN FD HAT")
+#@pytest.mark.skip("Requires CAN FD HAT")
 def test_can_hat_gpio():
 
     #Check if CAN interface exists
