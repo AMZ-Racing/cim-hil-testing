@@ -2,6 +2,10 @@
 import can
 import time
 
+@pytest.mark.skip("Requires CAN interface setup")
+def test_can_send():
+    pass
+
 def test_can_cross_channel(can0, can1):
     can0.send(0x123, [1,2,3])
 

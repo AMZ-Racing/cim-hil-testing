@@ -3,6 +3,10 @@ import can
 import time
 import pytest
 
+@pytest.mark.skip("Requires CAN interface setup")
+def test_can_send():
+    pass
+
 def test_bidirectional_communication(can0, can1):
     #Send message from can0 to can1
     can0.send(0x123, [1,2,3])
