@@ -1,5 +1,3 @@
-from unittest import result
-
 import RPi.GPIO as GPIO
 import pytest
 import time
@@ -69,15 +67,9 @@ def test_can_hat_gpio():
 
     #Bring up CAN interface
     # Example patch
-    #subprocess.run(["sudo", "ip", "link", "set", "can0", "down"], check=False)
-    #subprocess.run(["sudo", "ip", "link", "set", "can0", "up", "type", "can", "bitrate", "500000"], check=True)
-    result = subprocess.run(
-    ["ip", "link", "show", "can0"],
-    capture_output=True,
-    text=True
-    )
+    subprocess.run(["sudo", "ip", "link", "set", "can0", "down"], check=False)
+    subprocess.run(["sudo", "ip", "link", "set", "can0", "up", "type", "can", "bitrate", "500000"], check=True)
 
-    assert result.returncode == 0, "CAN interface can0 not found"
 
     #Open CAN bus
     can0 = can.Bus(
