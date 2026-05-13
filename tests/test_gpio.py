@@ -33,6 +33,7 @@ def test_gpio_high_low():
 
 
 #Test 3: confirm you can read a state -> Loopback
+@pytest.mark.skip("Requires physical loopback connection between GPIO pins 17 and 27")
 def test_gpio_loopback():
 
     out_pin = 17
