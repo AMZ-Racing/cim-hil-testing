@@ -4,7 +4,7 @@ import subprocess
 import can
 import time 
 
-@pytest.mark.skip("Requires CAN interface setup")
+# @pytest.mark.skip("Requires CAN interface setup")
 def test_can_fd_frame(can0, can1):
     data = list(range(32))  # 8 bytes = FD
 
