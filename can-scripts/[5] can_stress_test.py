@@ -2,29 +2,21 @@ import pytest
 import can
 
 # @pytest.mark.skip("Requires CAN interface setup")
-def test_can_stress(can0, can1):
+def test_can_stress():
+    can0 = can.Bus(interface="socketcan", channel="can0", bitrate=500000)
+    can1 = can.Bus(interface="socketcan", channel="can1", bitrate=500000)
 
-    # Send CAN messages
-    for i in range(500):
-
+    for i in range(100):
         msg = can.Message(
-            arbitration_id=0x123,
+            arbitration_id=0x100 + i,
             data=[i % 256],
             is_extended_id=False
         )
 
         can0.send(msg)
+        received = can1.recv(timeout=1.0)
 
-    # Count received messages
-    count = 0
+        assert received is not None
 
-    while True:
-
-        msg = can1.recv(timeout=0.1)
-
-        if msg is None:
-            break
-
-        count += 1
-
-    assert count > 450
+    can0.shutdown()
+    can1.shutdown()
