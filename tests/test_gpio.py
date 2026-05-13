@@ -71,7 +71,10 @@ def test_can_hat_gpio():
 
 
     #Open CAN bus
-    can0 = can.interface.Bus(channel="can0", bustype="socketcan")
+    can0 = can.Bus(
+    channel="can0",
+    interface="socketcan"
+)
 
     #can1 = can.interface.Bus(channel = 'can1', bustype = 'socketcan_ctypes')
 
