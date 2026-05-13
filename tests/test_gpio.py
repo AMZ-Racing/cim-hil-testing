@@ -67,10 +67,9 @@ def test_can_hat_gpio():
 
     #Bring up CAN interface
     # Example patch
-    subprocess.run(["sudo", "ip", "link", "set", "can0", "down"], check=False)
-    subprocess.run(["sudo", "ip", "link", "set", "can0", "up", "type", "can", "bitrate", "500000"], check=True)
+    subprocess.run(["ip", "link", "add", "vcan0", "type", "vcan"], check=False)
+    subprocess.run(["ip", "link", "set", "vcan0", "up"], check=False)
     
-
 
     #Open CAN bus
     can0 = can.Bus(interface="socketcan", channel="vcan0")

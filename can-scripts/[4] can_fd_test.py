@@ -16,6 +16,7 @@ def test_can_fd_frame():
     )
 
     can0.send(msg)
+    time.sleep(0.05)  # allow vcan propagation
     received = can1.recv(timeout=1.0)
 
     can0.shutdown()

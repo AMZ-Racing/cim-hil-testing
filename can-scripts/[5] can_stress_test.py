@@ -1,5 +1,6 @@
 import pytest
 import can
+import time
 
 # @pytest.mark.skip("Requires CAN interface setup")
 def test_can_stress():
@@ -14,6 +15,7 @@ def test_can_stress():
         )
 
         can0.send(msg)
+        time.sleep(0.005)
         received = can1.recv(timeout=1.0)
 
         assert received is not None
