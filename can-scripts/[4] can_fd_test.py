@@ -3,7 +3,11 @@ import time
 
 
 def test_can_fd_frame():
-    bus = can.Bus(interface="socketcan", channel="vcan0")
+    bus = can.Bus(
+        interface="socketcan",
+        channel="vcan0",
+        receive_own_messages=True
+    )
 
     msg = can.Message(
         arbitration_id=0x123,

@@ -3,7 +3,11 @@ import time
 
 
 def test_can_stress():
-    bus = can.Bus(interface="socketcan", channel="vcan0")
+    bus = can.Bus(
+        interface="socketcan",
+        channel="vcan0",
+        receive_own_messages=True
+    )
 
     for i in range(100):
         msg = can.Message(
@@ -19,5 +23,6 @@ def test_can_stress():
         received = bus.recv(timeout=1.0)
 
         assert received is not None
+        assert received.arbitration_id == 0x100 + i
 
     bus.shutdown()
