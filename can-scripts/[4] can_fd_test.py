@@ -6,8 +6,8 @@ import time
 
 # @pytest.mark.skip("Requires CAN interface setup")
 def test_can_fd_frame():
-    can0 = can.Bus(interface="socketcan", channel="can0")
-    can1 = can.Bus(interface="socketcan", channel="can1")
+    can0 = can.Bus(interface="socketcan", channel="vcan0")
+    can1 = can.Bus(interface="socketcan", channel="vcan1")
 
     msg = can.Message(
         arbitration_id=0x123,

@@ -3,8 +3,8 @@ import can
 
 # @pytest.mark.skip("Requires CAN interface setup")
 def test_can_stress():
-    can0 = can.Bus(interface="socketcan", channel="can0", bitrate=500000)
-    can1 = can.Bus(interface="socketcan", channel="can1", bitrate=500000)
+    can0 = can.Bus(interface="socketcan", channel="vcan0")
+    can1 = can.Bus(interface="socketcan", channel="vcan1")
 
     for i in range(100):
         msg = can.Message(
