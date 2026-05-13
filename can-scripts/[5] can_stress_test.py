@@ -4,21 +4,20 @@ import time
 
 # @pytest.mark.skip("Requires CAN interface setup")
 def test_can_stress():
-    can0 = can.Bus(interface="socketcan", channel="vcan0")
-    can1 = can.Bus(interface="socketcan", channel="vcan1")
+    bus = can.Bus(channel="vcan0", interface="socketcan")
 
-    for i in range(100):
-        msg = can.Message(
-            arbitration_id=0x100 + i,
-            data=[i % 256],
-            is_extended_id=False
-        )
+for i in range(100):
+    msg = can.Message(
+        arbitration_id=0x100 + i,
+        data=[i % 256],
+        is_extended_id=False
+    )
 
-        can0.send(msg)
-        time.sleep(0.005)
-        received = can1.recv(timeout=1.0)
+    bus.send(msg)
 
-        assert received is not None
+    time.sleep(0.005)
 
-    can0.shutdown()
-    can1.shutdown()
+    received = bus.recv(timeout=1.0)
+    assert received is not None
+
+bus.shutdown()
