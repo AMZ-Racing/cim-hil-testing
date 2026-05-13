@@ -6,8 +6,8 @@ import time
 
 # @pytest.mark.skip("Requires CAN interface setup")
 def test_can_fd_frame():
-    can0 = can.Bus(interface="socketcan", channel="can0", bitrate=500000)
-    can1 = can.Bus(interface="socketcan", channel="can1", bitrate=500000)
+    can0 = can.Bus(interface="socketcan", channel="can0")
+    can1 = can.Bus(interface="socketcan", channel="can1")
 
     msg = can.Message(
         arbitration_id=0x123,
@@ -22,4 +22,5 @@ def test_can_fd_frame():
     can1.shutdown()
 
     assert received is not None
+    assert not received.is_error_frame
     assert received.arbitration_id == 0x123
